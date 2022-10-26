@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Mensaje } from 'src/app/class/mensaje';
-import { Observable } from 'rxjs';
 import { MensajeService } from 'src/app/services/mensaje.service';
-import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 
@@ -16,11 +13,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class SalaAPage implements OnInit {
 
-  public usuario:string='';
-  public listado: Array<any>= [];
-  public listadoMensajes: Array<any>= [];
-  public mensaje:string = '';
-  
+  public usuario: string = '';
+  public listado: Array<any> = [];
+  public listadoMensajes: Array<any> = [];
+  public mensaje: string = '';
+
 
   constructor(
     public authSrv: AuthService,
@@ -29,31 +26,30 @@ export class SalaAPage implements OnInit {
     private toast: ToastController,
     public chat: MensajeService,
     public firestore: AngularFirestore
-  ) { 
+  ) {
     this.presentLoading();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.ordenarMensajes()
-    },2000)
+    }, 2000)
   }
 
   ngOnInit() {
     this.usuario = localStorage.getItem('usuario');
-  //  this.listadoMensajes = this.chat.chatsA;
-  this.chat.getMensajesA().subscribe(aux => {
-    this.listado = aux;
-  })
-  this.ordenarMensajes();
-  
+    this.chat.getMensajesA().subscribe(aux => {
+      this.listado = aux;
+    })
+    this.ordenarMensajes();
+
   }
 
-  ordenarMensajes(){
+  ordenarMensajes() {
     this.listadoMensajes = this.listado.sort((a?, b?) => (((a.referencia! > b.referencia!)) ? 1 : -1));
   }
   guardarMensaje() {
     this.chat.guardarMensajeA(this.usuario, this.mensaje);
-    setTimeout(()=>{
+    setTimeout(() => {
       this.ordenarMensajes();
-    },500)
+    }, 500)
     this.mensaje = '';
   }
 
@@ -90,7 +86,7 @@ export class SalaAPage implements OnInit {
     this.router.navigate(["login"]);
   }
 
-  back(){
+  back() {
     this.router.navigate(["home"]);
   }
 

@@ -11,8 +11,6 @@ import {
 } from '@angular/forms';
 import { timer } from "rxjs";
 import { Usuario } from "src/app/class/usuario";
-import { Creditos } from "src/app/class/creditos";
-import { CreditosService } from "src/app/services/creditos.service";
 
 
 @Component({
@@ -25,15 +23,6 @@ export class LoginPage implements OnInit {
   email: string;
   password: string;
   loginForm: FormGroup;
-  public creditosUsuarios: Creditos[];
-
-  get name() {
-    return this.loginForm.get("email");
-  }
-
-  get power() {
-    return this.loginForm.get("password");
-  }
 
   constructor(
     private authService: AuthService,
@@ -42,7 +31,6 @@ export class LoginPage implements OnInit {
     public toastController: ToastController,
     public loadingController: LoadingController,
     public afAuth: AngularFireAuth,
-    public creditosSrv: CreditosService
   ) {
     this.user = new Usuario();
   }
@@ -62,15 +50,6 @@ export class LoginPage implements OnInit {
     this.presentLoading();
     this.afAuth.signInWithEmailAndPassword(this.email, this.password)
       .then((res) => {
-        this.creditosSrv.getCreditos().subscribe(aux => {
-          this.creditosUsuarios = aux;
-          this.creditosUsuarios.forEach(item => {
-            if (item.usuario == this.email) {
-              localStorage.setItem('creditos', item.credito.toString());
-              this.creditosSrv.creditosUsuario = item;
-            }
-          })
-        })
         localStorage.setItem('usuario', this.email);
         if (this.email == 'admin@admin.com') { localStorage.setItem("tipoUsuario", "admin") } else { localStorage.setItem("tipoUsuario", "usuario") }
         timer(2000).subscribe(() => { this.router.navigate(['/home']) });

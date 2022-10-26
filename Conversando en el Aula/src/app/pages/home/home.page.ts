@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from "src/app/services/auth.service";
 import { ToastService } from "src/app/services/toast.service";
 import { AngularFireAuth } from "@angular/fire/auth";
 
 
-declare let window: any; // Don't forget this part!
+declare let window: any; 
 @Component({
   selector: "app-home",
   templateUrl: "home.page.html",
@@ -23,25 +22,15 @@ export class HomePage implements OnInit {
     private router: Router,
     public toastSrv: ToastService,
     private toast: ToastController,
-    public alertController: AlertController,
     public afAuth: AngularFireAuth
   ) {
   
   }
 
-
   ngOnInit() {
     this.usuarioLog = localStorage.getItem('usuario');
   }
 
-
-
-  async ShowtToastQrLimit() {
-    this.presentToast("Créditos", "Este código ya fue cargado", "warning");
-  }
-  async ShowtToastCargaOk(credito: number) {
-    this.presentToast("Créditos", "La operación se realizo correctamente", "success");
-  }
 
   Logout() {
     localStorage.removeItem('usuario');

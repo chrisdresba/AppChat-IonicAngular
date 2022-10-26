@@ -35,28 +35,11 @@ export class AuthService {
     return this.ngFireAuth.signInWithEmailAndPassword(email, password);
   }
 
-  // Recover password
-  PasswordRecover(passwordResetEmail) {
-    return this.ngFireAuth
-      .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert(
-          "Password reset email has been sent, please check your inbox."
-        );
-      })
-      .catch(error => {
-        window.alert(error);
-      });
-  }
 
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem("user"));
     return user !== null && user.emailVerified !== false ? true : false;
-  }
-  // Get role
-  getUserRol(uid) {
-    return this.afStore.doc<User>(`users/${uid}`).valueChanges();
   }
 
   // Sign-out

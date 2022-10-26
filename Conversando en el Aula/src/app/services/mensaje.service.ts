@@ -9,8 +9,8 @@ import { Mensaje } from '../class/mensaje';
 })
 export class MensajeService {
 
-  public chatsA : Mensaje [] = [];
-  public chatsB : Mensaje [] = [];
+  public chatsA: Mensaje[] = [];
+  public chatsB: Mensaje[] = [];
 
   constructor(private firestore: AngularFirestore) {
     this.getMensajesA().subscribe(item => {
@@ -20,28 +20,28 @@ export class MensajeService {
       this.chatsB = item;
     })
 
-   }
- 
-  async guardarMensajeA(usuario:any,mensaje:any){
+  }
+
+  async guardarMensajeA(usuario: any, mensaje: any) {
     let fecha = new Date();
-    let dia = fecha.getFullYear() + '-' + ( fecha.getMonth() + 1 ) + '-' + fecha.getDate();
-    let hora = fecha.getHours() + ':' + this.revision(fecha.getMinutes())+ ':' + this.revision(fecha.getSeconds());
-    let referencia = (fecha.getHours()*3600) + (fecha.getMinutes()*60) + fecha.getSeconds();
-    let texto = {'usuario':usuario,'fecha':dia, 'hora':hora,'mensaje':mensaje,'referencia':referencia}
+    let dia = fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate();
+    let hora = fecha.getHours() + ':' + this.revision(fecha.getMinutes()) + ':' + this.revision(fecha.getSeconds());
+    let referencia = (fecha.getHours() * 3600) + (fecha.getMinutes() * 60) + fecha.getSeconds();
+    let texto = { 'usuario': usuario, 'fecha': dia, 'hora': hora, 'mensaje': mensaje, 'referencia': referencia }
     return await this.firestore.collection('sala-a').add(texto);
   }
 
-  async guardarMensajeB(usuario:any,mensaje:any){
+  async guardarMensajeB(usuario: any, mensaje: any) {
     let fecha = new Date();
-    let dia = fecha.getFullYear() + '-' + ( fecha.getMonth() + 1 ) + '-' + fecha.getDate();
-    let hora = fecha.getHours() + ':' + this.revision(fecha.getMinutes())+ ':' + this.revision(fecha.getSeconds());
-    let referencia = (fecha.getHours()*3600) + (fecha.getMinutes()*60) + fecha.getSeconds();
-    let texto = {'usuario':usuario,'fecha':dia, 'hora':hora,'mensaje':mensaje,'referencia':referencia}
+    let dia = fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate();
+    let hora = fecha.getHours() + ':' + this.revision(fecha.getMinutes()) + ':' + this.revision(fecha.getSeconds());
+    let referencia = (fecha.getHours() * 3600) + (fecha.getMinutes() * 60) + fecha.getSeconds();
+    let texto = { 'usuario': usuario, 'fecha': dia, 'hora': hora, 'mensaje': mensaje, 'referencia': referencia }
     return await this.firestore.collection('sala-b').add(texto);
   }
 
 
-  getMensajesA  = (): Observable<any[]> => {
+  getMensajesA = (): Observable<any[]> => {
     return this.firestore.collection('sala-a').snapshotChanges().pipe(
       map(docs => {
         return docs.map(d => d.payload.doc.data()) as Mensaje[];
@@ -58,11 +58,10 @@ export class MensajeService {
   }
 
 
-  revision(dato : any){
-
-        if(dato<10){
-            return('0'+dato);
-        }
-        return dato;
+  revision(dato: any) {
+    if (dato < 10) {
+      return ('0' + dato);
+    }
+    return dato;
   }
 }
