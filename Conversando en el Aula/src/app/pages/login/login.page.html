@@ -1,0 +1,76 @@
+<ion-content>
+  <div class="welcome">
+    <ion-row>
+      <img class="vibrate-2" src="../../../assets/conversatorio.png" alt="">
+      <ion-text class="text-flicker-in-glow light">
+        CONVERSATORIO</ion-text>
+    </ion-row>
+  </div>
+  <div class="container">
+    <form [formGroup]="loginForm">
+      <ion-item lines="full">
+        <ion-label position="stacked">Correo electrónico</ion-label>
+        <ion-input type="email" formControlName="email" required size="" name="email" [(ngModel)]="email"
+          placeholder="Correo electrónico">
+        </ion-input>
+      </ion-item>
+      <ion-row class="hiddenItems">
+        <small
+          *ngIf="loginForm.get('email').hasError('required') && (loginForm.get('email').dirty || loginForm.get('email').touched)">Por
+          favor, ingrese su correo.</small>
+        <small *ngIf="loginForm.get('email').hasError('email')">Ingrese un correo valido.</small>
+      </ion-row>
+      <ion-item lines="full">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" class="form-control" required formControlName="password" name="password"
+          [(ngModel)]="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+      <ion-row class="hiddenItems">
+        <small
+          *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+          [ngClass]="loginForm.get('password').hasError('required') && loginForm.get('password').touched ? 'visible' : 'hidden'">Ingrese
+          una contraseña.</small>
+        <small
+          *ngIf="loginForm.get('password').hasError('maxlength') && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+          [ngClass]="loginForm.get('password').hasError('maxlength') && loginForm.get('password').touched ? 'visible' : 'hidden'">La
+          contraseña no debe contener mas de 6 caracteres.</small>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button class="lightFont" (click)="Login()" type="submit" class="medium" expand="block"
+            [disabled]="!loginForm.valid">Ingresar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-card class="btnSeccion">
+      <div class="btnChips">
+        <ion-chip (click)="testUser(1)" class="medium">
+          <ion-icon name="key-sharp"></ion-icon>
+          Admin
+        </ion-chip>
+        <ion-chip (click)="testUser(3)" class="warning">
+          <ion-icon name="happy-sharp"></ion-icon>
+          Usuario
+        </ion-chip>
+      </div>
+      <div class="btnChips">
+        <ion-chip (click)="testUser(2)" class="primary">
+          <ion-icon name="chatbubble-ellipses-sharp"></ion-icon>
+          Invitado
+        </ion-chip>
+      </div>
+      <div class="btnChips">
+        <ion-chip (click)="testUser(4)" class="success">
+          <ion-icon name="accessibility-sharp"></ion-icon>
+          Anónimo
+        </ion-chip>
+        <ion-chip (click)="testUser(5)" class="secondary">
+          <ion-icon name="construct-sharp"></ion-icon>
+          Tester
+        </ion-chip>
+      </div>
+    </ion-card>
+  </div>
+
+</ion-content>

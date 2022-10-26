@@ -1,0 +1,15 @@
+<ion-content [fullscreen]="true" style="background: none transparent" id="creditos">
+  <ion-fab horizontal="end" vertical="start" style="margin-top:1em">
+    <ion-fab-button (click)="Logout()" style="--background: var(--ion-color-dark);">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card class="sala-a" [routerLink]="['/sala-a']">
+  <img src="./../../../assets/logoA.png" alt="" title="Ingresar a la Sala A">
+   <h1 >PPS-A4</h1>
+  </ion-card>
+  <ion-card class="sala-b" [routerLink]="['/sala-b']">
+    <img src="./../../../assets/logoB.png" alt="" title="Ingresar a la Sala B">
+    <h1 >PPS-4B</h1>
+  </ion-card>
+</ion-content>

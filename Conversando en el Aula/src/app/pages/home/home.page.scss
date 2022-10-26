@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+ion-content {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  --background: #46205b;
+}
+
+ion-card {
+  width: 100vw;
+  height: 50vh;
+  margin: 0;
+  border-radius: 0;
+}
+
+img {
+  width: 100vw;
+  height: 45vh;
+  margin: 0;
+}
+
+.sala-a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --background: url("./../../../assets/fondo.png") no-repeat center;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.sala-b {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --background: url("./../../../assets/fondo2.png") no-repeat center;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+h1 {
+  margin-top: -30px;
+  text-align: center;
+  font-family: 'Acme', sans-serif;
+  font-size: 3em;
+  color: aliceblue;
+  -webkit-text-stroke: 0.6px rgb(10, 5, 5);
+}
+
+@media screen and (min-width: 460px) {
+  ion-content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  ion-card {
+    width: 50vw;
+    height: 100vh;
+    margin: 0;
+  }
+
+  img {
+    width: 250px;
+    height: 250px;
+    margin: 0;
+  }
+}
+
+@media (orientation: landscape) {
+  ion-card {
+    width: 50vw;
+    height: 100vh;
+    margin: 0;
+  }
+
+  img {
+    width: 50vw;
+    height: 100vh;
+    margin: 0;
+    margin-left: 25vw;
+  }
+}
