@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from "src/app/services/auth.service";
 import { ToastService } from "src/app/services/toast.service";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/compat/auth";
 
 
 declare let window: any; 

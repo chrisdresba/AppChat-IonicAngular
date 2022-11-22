@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { LoadingController, ToastController } from "@ionic/angular";
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   FormGroup,
   FormControl,
@@ -20,8 +20,8 @@ import { Usuario } from "src/app/class/usuario";
 })
 export class LoginPage implements OnInit {
   user: Usuario;
-  email: string;
-  password: string;
+  email: string="";
+  password: string ="";
   loginForm: FormGroup;
 
   constructor(

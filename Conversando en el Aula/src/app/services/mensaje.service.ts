@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Mensaje } from '../class/mensaje';
@@ -9,17 +9,12 @@ import { Mensaje } from '../class/mensaje';
 })
 export class MensajeService {
 
-  public chatsA: Mensaje[] = [];
-  public chatsB: Mensaje[] = [];
+  public chatsA: Observable<any[]>;
+  public chatsB: Observable<any[]>;
 
   constructor(private firestore: AngularFirestore) {
-    this.getMensajesA().subscribe(item => {
-      this.chatsA = item;
-    })
-    this.getMensajesB().subscribe(item => {
-      this.chatsB = item;
-    })
-
+      this.chatsA = this.firestore.collection('sala-a').valueChanges();
+      this.chatsB = this.firestore.collection('sala-b').valueChanges();
   }
 
   async guardarMensajeA(usuario: any, mensaje: any) {
