@@ -72,11 +72,10 @@ export class SalaAPage implements OnInit {
   }
 
   guardarMensaje() {
+        if (this.mensaje.length > 0) {
     this.chat.guardarMensajeA(this.usuarioLog, this.mensaje);
-    setTimeout(() => {
-      this.ordenarMensajes();
-    }, 500)
     this.mensaje = '';
+        }
   }
 
   async presentLoading() {
